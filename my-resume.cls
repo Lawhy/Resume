@@ -603,7 +603,7 @@
     \begin{minipage}[t]{3mm}%
         \makebox[3mm][c]{\footnotesize \faTrophy}
     \end{minipage}%
-    \hspace{0.6em}%
+    \hspace{2mm}%
     \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
         {\normalsize #1 \smallskip\newline \faCalendar \vspace{0.1cm} #2 \hfill $[$#3$]$ \par}
     \end{minipage}%
