@@ -246,39 +246,42 @@
 \newlength{\@namelineheight}
 \settoheight{\@namefontheight}{\Huge\bfseries\MakeUppercase{A}}
 \setlength\@namelineheight{1.5\@namefontheight}
+\RequirePackage{multicol}
+\RequirePackage{paracol}
 
 % assemble the header
 \newcommand{\makeheader}{% header bar is a minipage
-    \begin{minipage}[t][\headerheight]{\textwidth}%
-        % \vspace{-1em}
-        \vspace{\dimexpr \@namefontheight-\@namelineheight}                     % align top of name and photo
-        % create two minipages for header text and photo if photo is given
-        \ifdef{\@photodiameter}{
-            \begin{minipage}[t]{\dimexpr \textwidth-\@photodiameter}        % to top align name and photo add [t] here
-                \vspace{0cm}%
-            }{}
-            % print the header text
-                \begin{minipage}[t][2em]{\linewidth}
-                    {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
-                \end{minipage}%
-                \vfill%
-                \begin{minipage}[b][\dimexpr \headerheight-2em-\marginbottom]{\linewidth}%
-                    {\large\bfseries\color{headerfontcolor}\@tagline\par}
-                \end{minipage}%
-        % finish the minipages for text and photo if photo is given
-        \ifdef{\@photodiameter}{%
-            \end{minipage}\hfil%
-            \begin{minipage}[t]{\@photodiameter}                                % to top align name and photo add [t] here
-                \vspace{0cm}
-    			% format as square or round
-    			\ifthenelse{\equal{\@photoformat}{square}}{%
-    			    \includegraphics[width=\linewidth]{\@photo}%
-    			}{%
-    			    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
-    			}
-    		\end{minipage}%
-            }{}
-	\end{minipage}%
+   \begin{minipage}[\headerheight]{\textwidth}
+       \begin{minipage}[t][\headerheight]{0.64\textwidth}
+       \section[\faUser]{contact}
+           \begin{minipage}[t]{0.45\textwidth}
+               \email{yuan.he@cs.ox.ac.uk}
+               
+               \location{Parks Rd, Oxford, OX1 3QD}
+                
+               \homepage{Personal Homepage}{https://lawhy.github.io/}
+           \end{minipage}
+           \hfill
+           \begin{minipage}[t]{0.45\textwidth}
+                \github{Github Profile}{https://github.com/Lawhy}
+                
+                \linkedin{LinkedIn Profile}{https://www.linkedin.com/in/yuan-he-0557781aa/}
+                
+                \googlescholar{Google Scholar Profile}{https://scholar.google.com/citations?view_op=list_works&hl=en&user=sCXUhQcAAAAJ}
+           \end{minipage}
+       \end{minipage}
+       \hfill
+       \begin{minipage}[t][\headerheight]{0.33\textwidth}
+       \centering
+           \bigskip
+           {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
+           \vspace{0.5cm}
+           {\large\bfseries\color{darkgray}\@tagline\par}
+           \vspace{0.22cm}
+           {\large\bfseries\color{headerfontcolor}University of Oxford\par}
+       \end{minipage} 
+   \end{minipage}
+   \bigskip
 }
 
 \newcommand{\emptyheader}{%
@@ -404,14 +407,29 @@
     \vspace{0.5em}
 }
 
-\newcommand{\cvevent}[4]{%
-  { \large \color{emphasis}#1} \hfill
-  \ifstrequal{#3}{}{}{{\small\makebox[0.4\linewidth][l]{\faCalendar\hspace{0.5em}#3}}}%
+\newcommand{\cvedu}[4]{%
+  { 
+  \large \color{emphasis}#1} \hfill
+  \ifstrequal{#3}{}{}{{\small\makebox[0.3\linewidth][l]{\faCalendar\hspace{0.5em}#3}}}%
   \ifstrequal{#4}{}{}{{\small\makebox[0.2\linewidth][l]{\faMapMarker\hspace{0.5em}#4}}}
   \par
   \smallskip\normalsize
   \ifstrequal{#2}{}{}{
-  \textbf{\color{accent}#2}
+  \textbf{#2}
+  \smallskip \hfill} 
+  \par
+  \normalsize
+}
+
+\newcommand{\cvevent}[4]{%
+  { 
+  \large \textbf{#1}} \hfill
+  \ifstrequal{#3}{}{}{{\small\makebox[0.3\linewidth][l]{\faCalendar\hspace{0.5em}#3}}}%
+  \ifstrequal{#4}{}{}{{\small\makebox[0.2\linewidth][l]{\faMapMarker\hspace{0.5em}#4}}}
+  \par
+  \smallskip\normalsize
+  \ifstrequal{#2}{}{}{
+  \textbf{\color{gray}#2}
   \smallskip \hfill} 
   \par
   \normalsize
@@ -585,9 +603,9 @@
     \begin{minipage}[t]{3mm}%
         \makebox[3mm][c]{\footnotesize \faTrophy}
     \end{minipage}%
-    \hspace{0.5em}%
+    \hspace{0.6em}%
     \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
-        {\normalsize #1 \newline \faCalendar \vspace{0.1cm} #2 \hfill $[$#3$]$ \par}
+        {\normalsize #1 \smallskip\newline \faCalendar \vspace{0.1cm} #2 \hfill $[$#3$]$ \par}
     \end{minipage}%
     \par
     \vspace{0.5em}
